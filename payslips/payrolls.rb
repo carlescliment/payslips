@@ -1,18 +1,19 @@
 require 'date'
 
 require_relative './payslip'
+require_relative './payroll'
 
 
-class Payslips
+class Payrolls
   def initialize(path)
     @path = path
   end
 
   def by_month_and_year(month, year)
-    return [] unless File.exist?(path_for(month, year))
+    return Payroll.new(month, year, []) unless File.exist?(path_for(month, year))
 
     lines = File.read(path_for(month, year)).split("\n")
-    lines.map { |line| as_payslip(line) }
+    Payroll.new(month, year, lines.map { |line| as_payslip(line) })
   end
 
   private
