@@ -7,6 +7,10 @@ class Payroll
     @payslips = payslips
   end
 
+  def apply_new_irpf!(new_irpf)
+    @payslips.each { |payslip| payslip.apply_new_irpf!(new_irpf) }
+  end
+
   def self.blank(month, year)
     Payroll.new(month:month, year:year, payslips: [])
   end
