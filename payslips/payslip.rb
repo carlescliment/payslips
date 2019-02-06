@@ -6,7 +6,7 @@ class Payslip
 
   attr_reader :id, :vat, :date, :gross, :deductions, :irpf
 
-  def initialize(id, vat, date, gross, deductions, irpf)
+  def initialize(id:, vat:, date:, gross:, deductions:, irpf:)
     @id = id
     @vat = vat
     @date = date
@@ -16,7 +16,7 @@ class Payslip
   end
 
   def apply_new_irpf!(new_irpf)
-    @irpf = new_irpf
+    @irpf = new_irpf.to_f
   end
 
   def amount_of_deductions
