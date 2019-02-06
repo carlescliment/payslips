@@ -31,10 +31,7 @@ class Payrolls
       Date.parse("#{line[21..24]}-#{line[25..26]}-#{line[27..28]}"),
       line[29..36].to_i,
       "#{line[37..38]}.#{line[39..40]}".to_f,
-      line[41..48].to_i,
-      "#{line[49..50]}.#{line[51..52]}".to_f,
-      line[53..60].to_i,
-      line[61..68].to_i
+      "#{line[49..50]}.#{line[51..52]}".to_f
     )
   end
 end
