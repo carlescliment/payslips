@@ -1,3 +1,36 @@
+class Specification
+  class << self
+    def fields
+      [
+        Id.new(12),
+        Vat.new(9),
+        DateOfPayslip.new(8),
+        Gross.new(8),
+        Deductions.new(4),
+        AmountOfDeductions.new(8),
+        Irpf.new(4),
+        AmountOfIrpf.new(8),
+        Net.new(8)
+      ]
+    end
+
+    def prepare(payslip)
+      fields.collect { |field| field.prepare(payslip) }.join('')
+    end
+
+    def read(line)
+      data = {}
+      current_position = 0
+      fields.each do |field|
+        data[field.name] = field.read(current_position, line)
+        current_position += field.length
+      end
+
+      data
+    end
+  end
+end
+
 class Field
 
   attr_reader :length

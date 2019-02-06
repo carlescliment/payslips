@@ -41,7 +41,7 @@ RSpec.describe Payrolls do
   context 'when storing payrolls' do
     it 'writes the contents' do
       file = StringIO.new
-      payroll = Payroll.new(12, 2018, [
+      payroll = Payroll.new(month: 12, year: 2018, payslips: [
         Payslip.new(id: 1, vat: '97084172E', date: Date.parse('2018-12-31'),
                     gross: 248600, deductions: 5.0, irpf: 12.0)
       ])
