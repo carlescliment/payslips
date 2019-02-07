@@ -20,12 +20,12 @@ describe "Payslips API" do
       "id" => 1,
       "vat" => "97084172E",
       "date" => "2018-12-31",
-      "gross" => 248600,
-      "amount_of_deductions" => 12430,
-      "amount_of_irpf" => 29832,
+      "gross" => "2486.00",
+      "amount_of_deductions" => "124.30",
+      "amount_of_irpf" => "298.32",
       "deductions" => 5.0,
       "irpf" => 12.0,
-      "net" => 206338
+      "net" => "2063.38"
     })
 
   end
