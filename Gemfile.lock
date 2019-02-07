@@ -38,6 +38,7 @@ DEPENDENCIES
   json
   rack-test
   rspec
+  rspec-mocks
   shotgun
   sinatra
 

@@ -2,6 +2,7 @@ require 'sinatra'
 require 'json'
 
 require_relative './payslips/repository/payrolls'
+require_relative './payslips/action/bring_payroll'
 
 def storage_path
   './spec/payslips/fixtures'
@@ -9,8 +10,6 @@ end
 
 class PayslipsApp
   class << self
-    def update(year, month, payload)
-    end
   end
 end
 
@@ -21,9 +20,17 @@ end
 
 get '/v1/:year/:month' do
   content_type :json
+  payrolls = Payrolls.new(storage_path)
 
-  payroll = Payrolls.new(storage_path).by_month_and_year(params['month'], params['year'])
-  payroll.to_h.to_json
+  begin
+    BringPayroll.do(
+      payrolls: payrolls,
+      year: params['year'].to_i,
+      month: params['month'].to_i
+    ).to_json
+  rescue InvalidRequest
+    halt 400, 'Wrong parameters'
+  end
 end
 
 put '/v1/irpf' do
