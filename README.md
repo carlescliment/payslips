@@ -35,6 +35,7 @@ If you `git status` now, you'll see the payroll stored in `data/` has changed. T
 * I'm not fully confortable with the name of the URL for the PUT endpoint. Maybe I would have modelled it as a PATCH pointing to `v1/2018/12` with only the irpf as body. Dunno, APIs are something I'm very willing to learn about.
 * I noticed there were rounding problems in a couple of payslips in the original dataset. I've decided to keep the amounts as ints and only change to float for representation matters.
 * I could have spent more time with treating errors (for instance, unexpected file format or arguments). I have implemented only the most obvious (0 <= months <= 12, etc).
+* In `Payslip`, I doubted between having redundant data (irpf, discount and net amounts) stored in the model or calculate them when needed. Since I had no performance constraints defined, I decided to go for not having redundancies. I'm not a fan of memoization either, so CPU cycles are not taken into consideration for this exercise.
 * I've tried to organize the code in directories to make it as clean as possible, using the IDD (Mancuso) approach of putting the system featues as actions.
 * I considered the option of doing the payroll/payslips immutable by making the `apply_irpf!` method return a copy instead of modifying the state. Since it is an entity, I saw no clear benefits on doing it.
 * I considered the idea of using a Value Object for the money, but since there is no currency involved I went for the simplest option.
