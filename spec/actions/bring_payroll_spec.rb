@@ -1,5 +1,5 @@
-require_relative '../../../payslips/repository/payrolls'
-require_relative '../../../payslips/action/bring_payroll'
+require_relative '../../payslips/repository/payrolls'
+require_relative '../../payslips/action/bring_payroll'
 
 
 RSpec.describe BringPayroll do

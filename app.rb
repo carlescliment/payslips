@@ -5,7 +5,7 @@ require_relative './payslips/repository/payrolls'
 require_relative './payslips/action/bring_payroll'
 
 def storage_path
-  './spec/payslips/fixtures'
+  './spec/fixtures'
 end
 
 class PayslipsApp
