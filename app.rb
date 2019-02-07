@@ -30,7 +30,7 @@ class PayslipsApp < Sinatra::Base
     end
   end
 
-  put '/v1/irpf' do
+  put '/v1/irpf-change' do
     content_type :json
 
     request.body.rewind

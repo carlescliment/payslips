@@ -37,7 +37,7 @@ describe "Payslips API" do
         expect(args[:payload][:year]).to eq(2018)
       end
 
-      put "/v1/irpf", { irpf: 14.0, month: 12, year: 2018 }.to_json
+      put "/v1/irpf-change", { irpf: 14.0, month: 12, year: 2018 }.to_json
 
       expect(last_response).to be_ok
     end
