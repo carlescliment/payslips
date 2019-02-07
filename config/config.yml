@@ -1,5 +1,5 @@
 development:
-  storage_path: './payrolls/'
+  storage_path: './data/'
 test:
   storage_path: './spec/fixtures'
 production: 

@@ -9,7 +9,7 @@
 
 ### The GET endpoint
 
-A payroll is stored in the `payrolls/` directory that will serve as database. In order to load it, perform the following request with your favorite REST client:
+A payroll is stored in the `data/` directory that will serve as database. In order to load it, perform the following request with your favorite REST client:
 
 ```
 GET 127.0.0.1:9393/v1/2018/12
@@ -27,7 +27,7 @@ PUT 127.0.0.1:9393/v1/irpf-change
 {"month": 12, "year": 2018, "irpf": 14}
 ```
 
-If you `git status` now, you'll see the payroll stored in `payrolls/` has changed. Try the GET endpoint now to see the changes on the payroll.
+If you `git status` now, you'll see the payroll stored in `data/` has changed. Try the GET endpoint now to see the changes on the payroll.
 
 
 ### Comments
