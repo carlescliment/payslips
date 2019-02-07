@@ -1,8 +1,8 @@
 require 'date'
 
-require_relative './payslip'
-require_relative './payroll'
-require_relative './storage'
+require_relative '../entity/payslip'
+require_relative '../entity/payroll'
+require_relative '../infrastructure/storage'
 
 
 class Payrolls

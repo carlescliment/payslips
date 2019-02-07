@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'json'
 
-require_relative './payslips/payrolls'
+require_relative './payslips/repository/payrolls'
 
 def storage_path
   './spec/payslips/fixtures'

@@ -1,5 +1,5 @@
-require_relative '../../payslips/payslip'
-require_relative '../../payslips/payroll'
+require_relative '../../../payslips/entity/payslip'
+require_relative '../../../payslips/entity/payroll'
 
 
 RSpec.describe Payroll do

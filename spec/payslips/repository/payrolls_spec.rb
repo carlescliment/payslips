@@ -1,9 +1,9 @@
-require_relative '../../payslips/payrolls'
+require_relative '../../../payslips/repository/payrolls'
 
 
 RSpec.describe Payrolls do
 
-  let (:fixtures_path) { "#{File.dirname(__FILE__)}/fixtures" }
+  let (:fixtures_path) { "#{File.dirname(__FILE__)}/../fixtures" }
 
   before(:each) do
     @payrolls = Payrolls.new(fixtures_path)
