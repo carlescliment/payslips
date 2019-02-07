@@ -30,4 +30,18 @@ class Payslip
   def net
     @gross - amount_of_deductions - amount_of_irpf
   end
+
+  def to_h
+    {
+      id: @id,
+      vat: @vat,
+      date: @date.strftime('%Y-%m-%d'),
+      deductions: @deductions,
+      irpf: @irpf,
+      gross: @gross,
+      amount_of_deductions: amount_of_deductions,
+      amount_of_irpf: amount_of_irpf,
+      net: net
+    }
+  end
 end
