@@ -45,7 +45,7 @@ RSpec.describe Payrolls do
         Payslip.new(id: 1, vat: '97084172E', date: Date.parse('2018-12-31'),
                     gross: 248600, deductions: 5.0, irpf: 12.0)
       ])
-      expect(File).to receive(:open).with("#{fixtures_path}/payslips.201812.txt").and_yield(file)
+      expect(File).to receive(:open).with("#{fixtures_path}/payslips.201812.txt", 'w').and_yield(file)
 
       expected_output = "00000000000197084172E201812310024860005000001243012000002983200206338\n"
       expect(file).to receive(:write).with(expected_output)

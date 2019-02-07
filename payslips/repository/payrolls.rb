@@ -21,7 +21,7 @@ class Payrolls
   end
 
   def store(payroll)
-    File.open(path_for(payroll.month, payroll.year)) do |file|
+    File.open(path_for(payroll.month, payroll.year), 'w') do |file|
       payroll.payslips.each { |payslip| file.write("#{Specification.prepare(payslip)}\n") }
     end
   end

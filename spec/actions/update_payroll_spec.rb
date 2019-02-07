@@ -9,7 +9,7 @@ RSpec.describe UpdatePayroll do
     payroll = Payroll.blank(2, 2018)
     allow(payrolls).to receive(:by_month_and_year).with(2, 2018).and_return(payroll)
 
-    expect(payroll).to receive(:apply_new_irpf!)
+    expect(payroll).to receive(:apply_new_irpf!).with(14)
     expect(payrolls).to receive(:store).with(payroll)
 
     UpdatePayroll.do(payrolls: payrolls, payload: {
@@ -25,6 +25,16 @@ RSpec.describe UpdatePayroll do
         year: 2018,
         month: 13,
         irpf: 14
+      })
+    end.to raise_error(InvalidRequest)
+  end
+
+  it 'raises an error if irpf is invalid' do
+    expect do
+      UpdatePayroll.do(payrolls: payrolls, payload: {
+        year: 2018,
+        month: 12,
+        irpf: nil
       })
     end.to raise_error(InvalidRequest)
   end
