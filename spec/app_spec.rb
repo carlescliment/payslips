@@ -32,14 +32,12 @@ describe "Payslips API" do
     end
 
     it "updates payroll ipfs" do
-      expected_call_args = {
-        "year" => '2018',
-        "month" => "12",
-        "irpf" => 14.0
-      }
-      expect(PayslipsApp).to receive(:update).with(expected_call_args)
+      expect(UpdatePayroll).to receive(:do) do |args|
+        expect(args[:payload][:month]).to eq(12)
+        expect(args[:payload][:year]).to eq(2018)
+      end
 
-      put "/v1/irpf", { irpf: 14.0, month: "12", year: "2018" }.to_json
+      put "/v1/irpf", { irpf: 14.0, month: 12, year: 2018 }.to_json
 
       expect(last_response).to be_ok
     end

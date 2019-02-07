@@ -1,5 +1,5 @@
-class InvalidRequest < StandardError
-end
+require_relative '../error/invalid_request'
+
 
 class BringPayroll
   def self.do(payrolls:, year:, month:)

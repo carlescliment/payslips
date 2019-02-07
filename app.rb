@@ -3,14 +3,10 @@ require 'json'
 
 require_relative './payslips/repository/payrolls'
 require_relative './payslips/action/bring_payroll'
+require_relative './payslips/action/update_payroll'
 
 def storage_path
   './spec/fixtures'
-end
-
-class PayslipsApp
-  class << self
-  end
 end
 
 get '/' do
@@ -38,8 +34,20 @@ put '/v1/irpf' do
 
   request.body.rewind
   request_payload = JSON.parse request.body.read
+  payrolls = Payrolls.new(storage_path)
 
-  PayslipsApp.update(request_payload)
+  begin
+    UpdatePayroll.do(
+      payrolls: payrolls,
+      payload: {
+        month: request_payload['month'],
+        year: request_payload['year'],
+        irpf: request_payload['irpf']
+      }
+    )
+  rescue InvalidRequest
+    halt 400, 'Wrong parameters'
+  end
 
   {}.to_json
 end
