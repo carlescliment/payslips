@@ -7,7 +7,7 @@ require File.expand_path '../../app.rb', __FILE__
 
 module RSpecMixin
   include Rack::Test::Methods
-  def app() Sinatra::Application end
+  def app() PayslipsApp end
 end
 
 RSpec.configure { |c| c.include RSpecMixin }

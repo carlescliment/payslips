@@ -1,0 +1,6 @@
+development:
+  storage_path: './payrolls/'
+test:
+  storage_path: './spec/fixtures'
+production: 
+  storage_path: './to/be/defined/'

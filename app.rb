@@ -1,53 +1,58 @@
-require 'sinatra'
+require 'sinatra/base'
+require 'sinatra/config_file'
 require 'json'
 
 require_relative './payslips/repository/payrolls'
 require_relative './payslips/action/bring_payroll'
 require_relative './payslips/action/update_payroll'
 
-def storage_path
-  './spec/fixtures'
-end
+class PayslipsApp < Sinatra::Base
+  register Sinatra::ConfigFile
 
-get '/' do
-  content_type :json
-  {}.to_json
-end
+  config_file 'config/config.yml'
 
-get '/v1/:year/:month' do
-  content_type :json
-  payrolls = Payrolls.new(storage_path)
-
-  begin
-    BringPayroll.do(
-      payrolls: payrolls,
-      year: params['year'].to_i,
-      month: params['month'].to_i
-    ).to_json
-  rescue InvalidRequest
-    halt 400, 'Wrong parameters'
-  end
-end
-
-put '/v1/irpf' do
-  content_type :json
-
-  request.body.rewind
-  request_payload = JSON.parse request.body.read
-  payrolls = Payrolls.new(storage_path)
-
-  begin
-    UpdatePayroll.do(
-      payrolls: payrolls,
-      payload: {
-        month: request_payload['month'],
-        year: request_payload['year'],
-        irpf: request_payload['irpf']
-      }
-    )
-  rescue InvalidRequest
-    halt 400, 'Wrong parameters'
+  get '/' do
+    content_type :json
+    {}.to_json
   end
 
-  {}.to_json
+  get '/v1/:year/:month' do
+    content_type :json
+
+    begin
+      BringPayroll.do(
+        payrolls: payrolls,
+        year: params['year'].to_i,
+        month: params['month'].to_i
+      ).to_json
+    rescue InvalidRequest
+      halt 400, 'Wrong parameters'
+    end
+  end
+
+  put '/v1/irpf' do
+    content_type :json
+
+    request.body.rewind
+    request_payload = JSON.parse request.body.read
+
+    begin
+      UpdatePayroll.do(
+        payrolls: payrolls,
+        payload: {
+          month: request_payload['month'],
+          year: request_payload['year'],
+          irpf: request_payload['irpf']
+        }
+      )
+    rescue InvalidRequest
+      halt 400, 'Wrong parameters'
+    end
+
+    {}.to_json
+  end
+
+  def payrolls
+    Payrolls.new(settings.storage_path)
+  end
 end
