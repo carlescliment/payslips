@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 require_relative '../../payslips/repository/payrolls'
 
 
@@ -23,7 +25,7 @@ RSpec.describe Payrolls do
         expect(payslips_read[0].id).to eq(1)
         expect(payslips_read[0].vat).to eq('97084172E')
         expect(payslips_read[0].date.to_s).to eq('2018-12-31')
-        expect(payslips_read[0].gross).to eq(248600)
+        expect(payslips_read[0].gross).to eq(BigDecimal('2486.00'))
         expect(payslips_read[0].deductions).to eq(5.0)
         expect(payslips_read[0].irpf).to eq(12.00)
       end
@@ -43,7 +45,7 @@ RSpec.describe Payrolls do
       file = StringIO.new
       payroll = Payroll.new(month: 12, year: 2018, payslips: [
         Payslip.new(id: 1, vat: '97084172E', date: Date.parse('2018-12-31'),
-                    gross: 248600, deductions: 5.0, irpf: 12.0)
+                    gross: BigDecimal('2486.00'), deductions: 5.0, irpf: 12.0)
       ])
       expect(File).to receive(:open).with("#{fixtures_path}/payslips.201812.txt", 'w').and_yield(file)
 

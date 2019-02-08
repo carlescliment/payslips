@@ -6,7 +6,7 @@ class Payslip
     @id = id.to_i
     @vat = vat
     @date = date
-    @gross = gross.to_i
+    @gross = gross
     @deductions = deductions.to_f
     @irpf = irpf.to_f
   end
@@ -16,11 +16,11 @@ class Payslip
   end
 
   def amount_of_deductions
-    (@gross * @deductions / 100).to_i
+    @gross * @deductions / 100
   end
 
   def amount_of_irpf
-    (@gross * @irpf / 100).to_i
+    @gross * @irpf / 100
   end
 
   def net
@@ -44,9 +44,6 @@ class Payslip
   private
 
   def format_number(number)
-    whole_part = number / 100
-    decimal_part = number % 100
-
-    "#{whole_part}.#{decimal_part.to_s.rjust(2, '0')}"
+    "%.2f" % number.truncate(2)
   end
 end

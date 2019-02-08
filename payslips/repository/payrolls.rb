@@ -1,3 +1,4 @@
+require 'bigdecimal'
 require 'date'
 
 require_relative '../entity/payslip'
@@ -68,11 +69,13 @@ class Payrolls
   end
 
   def as_payslip(data)
+    gross = "#{data[:gross][0..-3].to_i}.#{data[:gross][-2..-1]}"
+
     Payslip.new(
       id: data[:id].to_i,
       vat: data[:vat],
       date: Date.parse(data[:date]),
-      gross: data[:gross].to_i,
+      gross: BigDecimal(gross),
       deductions: data[:deductions].to_f / 100,
       irpf: data[:irpf].to_f / 100
     )

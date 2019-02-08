@@ -21,6 +21,12 @@ class Field
   def name()
     raise 'not implemented'
   end
+
+  protected
+
+  def format_decimal(decimal)
+    (decimal * 100).to_i.to_s
+  end
 end
 
 class Id < Field
@@ -35,7 +41,7 @@ end
 
 class Vat < Field
   def value(payslip)
-    payslip.vat.to_s
+    payslip.vat
   end
 
   def name
@@ -55,7 +61,7 @@ end
 
 class Gross < Field
   def value(payslip)
-    payslip.gross.to_s
+    format_decimal(payslip.gross)
   end
 
   def name
@@ -65,7 +71,7 @@ end
 
 class Deductions < Field
   def value(payslip)
-    (payslip.deductions * 100).to_i.to_s
+    format_decimal(payslip.deductions)
   end
 
   def name
@@ -75,7 +81,7 @@ end
 
 class AmountOfDeductions < Field
   def value(payslip)
-    payslip.amount_of_deductions.to_s
+    format_decimal(payslip.amount_of_deductions)
   end
 
   def name
@@ -85,7 +91,7 @@ end
 
 class Irpf < Field
   def value(payslip)
-    (payslip.irpf * 100).to_i.to_s
+    format_decimal(payslip.irpf)
   end
 
   def name
@@ -95,7 +101,7 @@ end
 
 class AmountOfIrpf < Field
   def value(payslip)
-    payslip.amount_of_irpf.to_s
+    format_decimal(payslip.amount_of_irpf)
   end
 
   def name
@@ -105,7 +111,7 @@ end
 
 class Net < Field
   def value(payslip)
-    payslip.net.to_s
+    format_decimal(payslip.net)
   end
 
   def name

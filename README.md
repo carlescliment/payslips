@@ -42,3 +42,7 @@ If you `git status` now, you'll see the payroll stored in `data/` has changed. T
 * One of the areas I spent more time with is the reading/writing of the payroll file. I wanted something that could be easy to read, and to change. So I came up with the `Specification` class in the repository.
 * After more than two years without writing Ruby I'm more rusty than I expected. Hope I haven't made big mistakes.
 * It's a simple exercise but I have had A LOT OF FUN doing this. Cheers!
+
+
+### Updates
+08/02 I didn't like to work with ints so I've reconsidered. Now I'm using BigDecimal.
