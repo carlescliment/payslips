@@ -55,7 +55,8 @@ class Payrolls
   end
 
   def store(payroll)
-    File.open(path_for(payroll.month, payroll.year), 'w') do |file|
+    File.open(path_for(payroll.month, payroll.year), File::RDWR|File::CREAT) do |file|
+      file.flock(File::LOCK_EX)
       payroll.payslips.each { |payslip| file.write("#{Specification.prepare(payslip)}\n") }
     end
   end

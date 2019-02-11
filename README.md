@@ -45,4 +45,5 @@ If you `git status` now, you'll see the payroll stored in `data/` has changed. T
 
 
 ### Updates
-08/02 I didn't like to work with ints so I've reconsidered. Now I'm using BigDecimal.
+* 08/02 I didn't like to work with ints so I've reconsidered. Now I'm using BigDecimal.
+* 11/02 Use lock for writings to avoid concurrent writes and data corruption.
